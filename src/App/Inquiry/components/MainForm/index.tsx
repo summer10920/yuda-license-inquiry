@@ -3,9 +3,10 @@ import { Dayjs } from "dayjs";
 import React from "react";
 import Review from "../Review";
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import FirstStep from "./FirstStep";
-import SecondStep from "./SecondStep";
+import FirstStep from "./component/FirstStep";
+import SecondStep from "./component/SecondStep";
 import { useSnackbar } from '../../../Context/Snackbar';
+import { checkInquiry } from "./api";
 
 const steps = ['證書查詢', '查詢結果'];
 
@@ -46,27 +47,18 @@ export default function MainForm() {
 
 
     try {
-      const response = await fetch('YOUR_API_ENDPOINT', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToSubmit),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
+      const data = await checkInquiry(dataToSubmit); // 使用 checkInquiry 函數
       console.log('Success:', data);
       showSnackbar('提交成功！', 'success');
       handleNext();
-      // 在這裡處理成功的回應
     } catch (error) {
-      console.error('Error:', error);
-      showSnackbar('發生錯誤: ' + error, 'error');
-      // 在這裡處理錯誤
+      if (error instanceof Error) {
+        console.error('Error:', error);
+        showSnackbar('發生錯誤: ' + error.message, 'error');
+      } else {
+        console.error('Unexpected error:', error);
+        showSnackbar('發生未知錯誤', 'error');
+      }
     }
   }
 
@@ -125,7 +117,7 @@ export default function MainForm() {
       >
         {steps.map((label) => (
           <Step
-            sx={{ ':first-child': { pl: 0 }, ':last-child': { pr: 0 } }}
+            sx={{ ':first-of-type': { pl: 0 }, ':last-child': { pr: 0 } }}
             key={label}
           >
             <StepLabel>{label}</StepLabel>
@@ -141,7 +133,7 @@ export default function MainForm() {
         {steps.map((label) => (
           <Step
             sx={{
-              ':first-child': { pl: 0 },
+              ':first-of-type': { pl: 0 },
               ':last-child': { pr: 0 },
               '& .MuiStepConnector-root': { top: { xs: 6, sm: 12 } },
             }}

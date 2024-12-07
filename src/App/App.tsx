@@ -3,20 +3,48 @@
 // import viteLogo from '/vite.svg'
 import './App.scss'
 import Inquiry from './Inquiry';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Inquiry />,
+    },
+    // {
+    //   path: '*',
+    //   element: <NotFound />,
+    // },
+  ],
+  {
+    future: {
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+      v7_fetcherPersist: true,
+      v7_normalizeFormMethod: true,
+      v7_partialHydration: true,
+      v7_skipActionErrorRevalidation: true,
+    },
+  }
+);
+
 
 function App() {
   // const [count, setCount] = useState(0)
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Inquiry />} />
-        {/* <Route path="/admin" element={<Admin />} /> */}
-        {/* <Route path="*" element={<NotFound />} /> */}
-      </Routes>
-    </BrowserRouter>
-  )
+    <RouterProvider router={router} />
+  );
+
+
+  // return (
+  //   <BrowserRouter>
+  //     <Routes>
+  //       <Route path="/" element={<Inquiry />} />
+  //       {/* <Route path="/admin" element={<Admin />} /> */}
+  //       {/* <Route path="*" element={<NotFound />} /> */}
+  //     </Routes>
+  //   </BrowserRouter>
+  // )
 }
 {/* <Checkout />
 <div>

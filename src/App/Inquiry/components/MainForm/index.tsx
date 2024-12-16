@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import FirstStep from "./component/FirstStep";
 import SecondStep from "./component/SecondStep";
 import { useSnackbar } from '../../../Context/Snackbar';
-import { checkInquiry } from "./api";
+import { checkInquiry } from "../../services/api";
 
 const steps = ['證書查詢', '查詢結果'];
 
@@ -47,7 +47,7 @@ export default function MainForm() {
 
 
     try {
-      const data = await checkInquiry(dataToSubmit); // 使用 checkInquiry 函數
+      const data = await checkInquiry(dataToSubmit);
       console.log('Success:', data);
       showSnackbar('提交成功！', 'success');
       handleNext();

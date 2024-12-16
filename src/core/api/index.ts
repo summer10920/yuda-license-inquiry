@@ -1,4 +1,5 @@
 import API from './url';
-import fetchApi from './fetch';
+import fetchApi from './fetchMethod';
+import apolloApi from './apolloMethod';
 
-export { API, fetchApi };
+export { API, fetchApi, apolloApi };

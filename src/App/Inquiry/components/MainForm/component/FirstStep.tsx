@@ -4,24 +4,12 @@ import TextField from '@mui/material/TextField';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import React, { useState } from 'react';
-import { Dayjs } from 'dayjs';
+import { FirstStepProps } from '../../../models/inquiry-mainForm.model';
 
 const FormGrid = styled(Grid)(() => ({
   display: 'flex',
   flexDirection: 'column',
 }));
-
-interface FirstStepProps {
-  formData: {
-    userName: string;
-    snNumber: string;
-    issueDate: Dayjs | null;
-    expiryDate: Dayjs | null;
-  };
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleDateChange: (name: string) => (newValue: Dayjs | null) => void;
-  onSubmit: (event: React.FormEvent) => void;
-}
 
 
 export default function FirstStep({

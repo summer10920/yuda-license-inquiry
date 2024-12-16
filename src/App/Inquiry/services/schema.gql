@@ -1,0 +1,27 @@
+# 定義輸入類型
+input InquiryInput {
+  userName: String!
+  snNumber: String!
+  issueDate: String! # 可以根據需要使用 Date 類型
+  expiryDate: String! # 可以根據需要使用 Date 類型
+}
+
+# 定義證書查詢結果的類型
+type Certificate {
+  title: String!
+  author: String!
+  issueDate: String!
+  expiryDate: String!
+}
+
+# 定義變更的響應類型
+type InquiryResponse {
+  success: Boolean!
+  message: String!
+  data: Certificate # 返回的證書資料
+}
+
+# 定義變更
+type Mutation {
+  submitInquiry(data: InquiryInput!): InquiryResponse!
+}
